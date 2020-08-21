@@ -7,7 +7,7 @@ export default class AddEvent extends Component {
         super(props);
         this.state = {
             eventName: '',
-            eventCategory: 'CURSE',
+            eventCategory: 'COURSE',
             eventPlace: '',
             eventAddress: '',
             eventInitialDate: '',
@@ -91,7 +91,7 @@ export default class AddEvent extends Component {
                     <div className="form-group">
                         <label>Select event's category:</label>
                         <select className="form-control" id="exampleFormControlSelect1" onChange={this.handleChangeCategory}>
-                            <option value="CURSE">Course</option>
+                            <option value="COURSE">Course</option>
                             <option value="CONGRESS">Congress</option>
                             <option value="SEMINAR">Seminar</option>
                             <option value="CONFERENCE">Conference</option>

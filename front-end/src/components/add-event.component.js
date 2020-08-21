@@ -7,12 +7,12 @@ export default class AddEvent extends Component {
         super(props);
         this.state = {
             eventName: '',
-            eventCategory: '',
+            eventCategory: 'CURSE',
             eventPlace: '',
             eventAddress: '',
             eventInitialDate: '',
             eventFinalDate: '',
-            eventType: '',
+            eventType: 'VIRTUAL',
             eventFile: '',
             isPosted: false
         }

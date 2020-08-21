@@ -63,7 +63,7 @@ export default class AddEvent extends Component {
         eventData.set('event_type', this.state.eventType);
         eventData.set('thumbnail', this.state.eventFile);
 
-        axios.post(`http://localhost:8080/api/events/`,
+        axios.post(`http://172.24.98.144:8080/api/events/`,
         eventData,
             {
                 headers:{

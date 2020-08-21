@@ -11,7 +11,7 @@ export default class Event extends Component {
         }
     }
     componentDidMount() {
-        axios.get(`http://localhost:8080/api/events/${this.props.location.state.id}`,
+        axios.get(`http://172.24.98.144:8080/api/events/${this.props.location.state.id}`,
         {
             headers: {
                 'Content-Type': 'multipart/form-data',
@@ -29,7 +29,7 @@ export default class Event extends Component {
 
         console.log(`${this.props.location.state.token}`)
 
-        axios.delete(`http://localhost:8080/api/events/${this.props.location.state.id}`,
+        axios.delete(`http://172.24.98.144:8080/api/events/${this.props.location.state.id}`,
             {
                 headers:{
                     'Content-Type': 'multipart/form-data',

@@ -10,7 +10,7 @@ export default class Events extends Component {
     }
 
     componentDidMount() {
-        axios.get(`http://localhost:8080/api/events/`,
+        axios.get(`http://172.24.98.144:8080/api/events/`,
         {
             headers: {
                 'Content-Type': 'multipart/form-data',

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     post '/create-user', to: 'user#signup'
     post '/events', to: 'events#post_event'
 
-    get '/events/(/:id)', to: 'events#get_events'
+    get '/events', to: 'events#get_events'
     get '/events/(/:id)', to: 'events#get_event'
 
     put '/events/(/:id)', to: 'events#put_event'

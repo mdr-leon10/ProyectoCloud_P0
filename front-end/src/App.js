@@ -39,9 +39,6 @@ export default class App extends React.Component {
           <li className="nav-item">
             <Link className="nav-link" to={"/create-event"}>Add Event</Link>
           </li>
-        <li className="nav-item">
-          <Link className="nav-link" to={"/edit-event"}>Edit Event</Link>
-        </li>
         </ul>
       );
 

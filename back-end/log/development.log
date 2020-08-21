@@ -1,0 +1,2549 @@
+  [1m[35m (3.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20200812210543)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar, "email" varchar, "password_digest" varchar, "first_name" varchar, "last_name" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20200812210543"]]
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateEvents (20200813022104)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "events" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "event_name" varchar, "event_category" varchar, "event_place" varchar, "event_address" varchar, "event_initial_date" date, "event_final_date" date, "event_type" varchar, "thumbnail" varchar, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_0cb5590091"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_events_on_user_id" ON "events" ("user_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20200813022104"]]
+  [1m[35m (1.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-08-14 02:15:31.148567"], ["updated_at", "2020-08-14 02:15:31.148567"]]
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2020-08-13 21:17:12 -0500
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/mariadelrosarioleon/.rvm/gems/ruby-2.7.0/gems/railties-6.0.3.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/mariadelrosarioleon/.rvm/gems/ruby-2.7.0/gems/railties-6.0.3.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 12.4ms | Allocations: 427)
+Completed 200 OK in 27ms (Views: 20.7ms | ActiveRecord: 0.0ms | Allocations: 2348)
+
+
+Started POST "/api/create-user/" for ::1 at 2020-08-13 21:18:06 -0500
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::UserController#signup as */*
+  Parameters: {"username"=>"maro96leon", "first_name"=>"Maria", "last_name"=>"León", "email"=>"maro96leon@gmail.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.4ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO "users" ("id", "username", "email", "password_digest", "first_name", "last_name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 5], ["username", "maro96leon"], ["email", "maro96leon@gmail.com"], ["password_digest", "$2a$12$SHLbADnnjTeqjsWX/QkTLeti3nUz5LIeXFix7eSyoa6vscNFjL92."], ["first_name", "Maria"], ["last_name", "León"], ["created_at", "2020-08-14 02:18:07.224949"], ["updated_at", "2020-08-14 02:18:07.224949"]]
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+Completed 200 OK in 403ms (Views: 0.3ms | ActiveRecord: 2.9ms | Allocations: 9171)
+
+
+Started POST "/api/api-auth/" for ::1 at 2020-08-13 21:18:14 -0500
+Processing by Api::AuthenticationController#authenticate as */*
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 804ms (Views: 6.3ms | ActiveRecord: 0.3ms | Allocations: 2030)
+
+
+Started POST "/api/events/" for ::1 at 2020-08-13 21:19:14 -0500
+Processing by Api::EventsController#post_event as */*
+  Parameters: {"event_name"=>"Sesión Síncrona – Desarrollo de Soluciones Cloud ", "event_category"=>"C\n", "event_place"=>"Conferencia Virtual vía Sicua+", "event_address"=>"https://sicuaplus.uniandes.edu.co/", "event_initial_date"=>"2020-08-17T18:00:00Z", "event_final_date"=>"2020-08-17T20:30:00Z", "event_type"=>"V"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/events_controller.rb:5:in `post_event'
+  [1m[36mEvent Create (1.2ms)[0m  [1m[32mINSERT INTO "events" ("id", "event_name", "event_category", "event_place", "event_address", "event_initial_date", "event_final_date", "event_type", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 49], ["event_name", "Sesión Síncrona – Desarrollo de Soluciones Cloud "], ["event_category", "C\n"], ["event_place", "Conferencia Virtual vía Sicua+"], ["event_address", "https://sicuaplus.uniandes.edu.co/"], ["event_initial_date", "2020-08-17"], ["event_final_date", "2020-08-17"], ["event_type", "V"], ["user_id", 5], ["created_at", "2020-08-14 02:19:14.404874"], ["updated_at", "2020-08-14 02:19:14.404874"]]
+  ↳ app/controllers/api/events_controller.rb:5:in `post_event'
+  [1m[35m (2.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/events_controller.rb:5:in `post_event'
+Completed 200 OK in 337ms (Views: 0.2ms | ActiveRecord: 4.9ms | Allocations: 17134)
+
+
+Started GET "/api/events/" for ::1 at 2020-08-13 21:19:21 -0500
+Processing by Api::EventsController#get_events as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 5]]
+  ↳ app/controllers/api/events_controller.rb:55:in `get_events'
+Completed 200 OK in 4ms (Views: 1.9ms | ActiveRecord: 0.5ms | Allocations: 1915)
+
+
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", "environment"]]
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20200812210543)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar, "email" varchar, "password_digest" varchar, "first_name" varchar, "last_name" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20200812210543"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateEvents (20200813022104)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "events" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "event_name" varchar, "event_category" varchar, "event_place" varchar, "event_address" varchar, "event_initial_date" date, "event_final_date" date, "event_type" varchar, "thumbnail" varchar, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_0cb5590091"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE  INDEX "index_events_on_user_id" ON "events" ("user_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20200813022104"]]
+  [1m[35m (1.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-08-14 02:29:12.575681"], ["updated_at", "2020-08-14 02:29:12.575681"]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/api/create-user/" for ::1 at 2020-08-13 21:32:16 -0500
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::UserController#signup as */*
+  Parameters: {"username"=>"maro96leon", "first_name"=>"Maria", "last_name"=>"León", "email"=>"maro96leon@gmail.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("id", "username", "email", "password_digest", "first_name", "last_name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 733578], ["username", "maro96leon"], ["email", "maro96leon@gmail.com"], ["password_digest", "$2a$12$wLAkIrm/PVQX1LpqsTLMJOehoig0yUdacEDarl6SeYNPoAdhmyU6i"], ["first_name", "Maria"], ["last_name", "León"], ["created_at", "2020-08-14 02:32:16.512134"], ["updated_at", "2020-08-14 02:32:16.512134"]]
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[35m (2.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+Completed 200 OK in 285ms (Views: 0.4ms | ActiveRecord: 3.4ms | Allocations: 8900)
+
+
+Started POST "/api/api-auth/" for ::1 at 2020-08-13 21:32:19 -0500
+Processing by Api::AuthenticationController#authenticate as */*
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 559ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 1935)
+
+
+Started POST "/api/events/" for ::1 at 2020-08-13 21:32:42 -0500
+Processing by Api::EventsController#post_event as */*
+  Parameters: {"event_name"=>"Sesión Síncrona – Desarrollo de Soluciones Cloud ", "event_category"=>"COURSE", "event_place"=>"Conferencia Virtual vía Sicua+", "event_address"=>"https://sicuaplus.uniandes.edu.co/", "event_initial_date"=>"2020-08-17T18:00:00Z", "event_final_date"=>"2020-08-17T20:30:00Z", "event_type"=>"V"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 733578], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+Completed 200 OK in 46ms (Views: 0.2ms | ActiveRecord: 1.1ms | Allocations: 11153)
+
+
+Started POST "/api/events/" for ::1 at 2020-08-13 21:33:05 -0500
+Processing by Api::EventsController#post_event as */*
+  Parameters: {"event_name"=>"Sesión Síncrona – Desarrollo de Soluciones Cloud ", "event_category"=>"C", "event_place"=>"Conferencia Virtual vía Sicua+", "event_address"=>"https://sicuaplus.uniandes.edu.co/", "event_initial_date"=>"2020-08-17T18:00:00Z", "event_final_date"=>"2020-08-17T20:30:00Z", "event_type"=>"VIRTUAL"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 733578], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+Completed 200 OK in 4ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1355)
+
+
+Started POST "/api/events/" for ::1 at 2020-08-13 21:33:20 -0500
+Processing by Api::EventsController#post_event as */*
+  Parameters: {"event_name"=>"Sesión Síncrona – Desarrollo de Soluciones Cloud ", "event_category"=>"COURSE", "event_place"=>"Conferencia Virtual vía Sicua+", "event_address"=>"https://sicuaplus.uniandes.edu.co/", "event_initial_date"=>"2020-08-17T18:00:00Z", "event_final_date"=>"2020-08-17T20:30:00Z", "event_type"=>"VIRTUAL"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 733578], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/events_controller.rb:5:in `post_event'
+  [1m[36mEvent Create (0.5ms)[0m  [1m[32mINSERT INTO "events" ("id", "event_name", "event_category", "event_place", "event_address", "event_initial_date", "event_final_date", "event_type", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 40], ["event_name", "Sesión Síncrona – Desarrollo de Soluciones Cloud "], ["event_category", "COURSE"], ["event_place", "Conferencia Virtual vía Sicua+"], ["event_address", "https://sicuaplus.uniandes.edu.co/"], ["event_initial_date", "2020-08-17"], ["event_final_date", "2020-08-17"], ["event_type", "VIRTUAL"], ["user_id", 733578], ["created_at", "2020-08-14 02:33:20.807335"], ["updated_at", "2020-08-14 02:33:20.807335"]]
+  ↳ app/controllers/api/events_controller.rb:5:in `post_event'
+  [1m[35m (1.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/events_controller.rb:5:in `post_event'
+Completed 200 OK in 10ms (Views: 0.1ms | ActiveRecord: 2.0ms | Allocations: 3777)
+
+
+Started POST "/api/create-user/" for ::1 at 2020-08-13 21:39:35 -0500
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::UserController#signup as */*
+  Parameters: {"username"=>"maro96leon", "first_name"=>"Maria", "last_name"=>"León", "email"=>"maro96leon@gmail.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "maro96leon@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+Completed 500 Internal Server Error in 300ms (ActiveRecord: 1.0ms | Allocations: 14287)
+
+
+  
+NoMethodError (undefined method `error' for #<User:0x00007fcfc80557e0>
+Did you mean?  errors):
+  
+app/controllers/api/user_controller.rb:9:in `signup'
+Started POST "/api/create-user/" for ::1 at 2020-08-13 21:42:25 -0500
+Processing by Api::UserController#signup as */*
+  Parameters: {"username"=>"maro96leon", "first_name"=>"Maria", "last_name"=>"León", "email"=>"mari96leon@gmail.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "mari96leon@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO "users" ("id", "username", "email", "password_digest", "first_name", "last_name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 9], ["username", "maro96leon"], ["email", "mari96leon@gmail.com"], ["password_digest", "$2a$12$/LbNTJnGPI7iMgpHULxDheSi2lhZ4TMT3wj/zWM1ZBY.bz2/HykYS"], ["first_name", "Maria"], ["last_name", "León"], ["created_at", "2020-08-14 02:42:25.770887"], ["updated_at", "2020-08-14 02:42:25.770887"]]
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[35m (2.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+Completed 200 OK in 285ms (Views: 0.1ms | ActiveRecord: 3.5ms | Allocations: 3826)
+
+
+Started POST "/api/create-user/" for ::1 at 2020-08-13 21:43:37 -0500
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::UserController#signup as */*
+  Parameters: {"username"=>"maro96leon", "first_name"=>"Maria", "last_name"=>"León", "email"=>"mari96leon@gmail.com", "password"=>"[FILTERED]"}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 183)
+
+
+  
+SyntaxError (/Users/mariadelrosarioleon/OneDrive - Universidad de los Andes/Universidad Maestría/Construcción de soluciones Cloud/Proyectos/Project0Cloud/app/models/user.rb:4: syntax error, unexpected '{', expecting `end'
+...ates :email, uniqueness: true {message: "User with this emai...
+...                              ^
+/Users/mariadelrosarioleon/OneDrive - Universidad de los Andes/Universidad Maestría/Construcción de soluciones Cloud/Proyectos/Project0Cloud/app/models/user.rb:4: syntax error, unexpected '}', expecting `end'
+...ith this email already exists"}
+...                              ^
+):
+  
+app/models/user.rb:4: syntax error, unexpected '{', expecting `end'
+app/models/user.rb:4: syntax error, unexpected '}', expecting `end'
+app/models/user.rb:4: syntax error, unexpected '{', expecting `end'
+app/models/user.rb:4: syntax error, unexpected '}', expecting `end'
+app/controllers/api/user_controller.rb:5:in `signup'
+Started POST "/api/create-user/" for ::1 at 2020-08-13 21:44:43 -0500
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::UserController#signup as */*
+  Parameters: {"username"=>"maro96leon", "first_name"=>"Maria", "last_name"=>"León", "email"=>"mari96leon@gmail.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "mari96leon@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+Completed 500 Internal Server Error in 294ms (ActiveRecord: 1.5ms | Allocations: 12917)
+
+
+  
+NoMethodError (undefined method `error' for #<User:0x00007faea5b64bc0>
+Did you mean?  errors):
+  
+app/controllers/api/user_controller.rb:9:in `signup'
+Started POST "/api/create-user/" for ::1 at 2020-08-13 21:45:42 -0500
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::UserController#signup as */*
+  Parameters: {"username"=>"maro96leon", "first_name"=>"Maria", "last_name"=>"León", "email"=>"mari96leon@gmail.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "mari96leon@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+Completed 200 OK in 284ms (Views: 0.3ms | ActiveRecord: 1.5ms | Allocations: 10738)
+
+
+Started GET "/" for ::1 at 2020-08-20 01:17:40 -0500
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/mariadelrosarioleon/.rvm/gems/ruby-2.7.0/gems/railties-6.0.3.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/mariadelrosarioleon/.rvm/gems/ruby-2.7.0/gems/railties-6.0.3.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 23.0ms | Allocations: 313)
+Completed 200 OK in 32ms (Views: 27.7ms | ActiveRecord: 0.0ms | Allocations: 1631)
+
+
+Started GET "/favicon.ico" for ::1 at 2020-08-20 01:17:40 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+actionpack (6.0.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3.2) lib/rails/engine.rb:527:in `call'
+puma (4.3.5) lib/puma/configuration.rb:228:in `call'
+puma (4.3.5) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.5) lib/puma/server.rb:472:in `process_client'
+puma (4.3.5) lib/puma/server.rb:328:in `block in run'
+puma (4.3.5) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started POST "/api/create-user/" for ::1 at 2020-08-20 01:26:22 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::UserController#signup as HTML
+  Parameters: {"username"=>"maro96leon", "first_name"=>"undefined", "last_name"=>"", "email"=>"maro96leon@gmail.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "maro96leon@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+Completed 200 OK in 262ms (Views: 0.2ms | ActiveRecord: 1.7ms | Allocations: 10820)
+
+
+Started GET "/" for ::1 at 2020-08-20 01:35:48 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/mariadelrosarioleon/.rvm/gems/ruby-2.7.0/gems/railties-6.0.3.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/mariadelrosarioleon/.rvm/gems/ruby-2.7.0/gems/railties-6.0.3.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 22.6ms | Allocations: 178)
+Completed 200 OK in 24ms (Views: 23.4ms | ActiveRecord: 0.0ms | Allocations: 710)
+
+
+Started GET "/api/events" for ::1 at 2020-08-20 01:35:55 -0500
+Processing by Api::EventsController#get_events as HTML
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 4ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 312)
+
+
+Started GET "/favicon.ico" for ::1 at 2020-08-20 01:35:55 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+actionpack (6.0.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3.2) lib/rails/engine.rb:527:in `call'
+puma (4.3.5) lib/puma/configuration.rb:228:in `call'
+puma (4.3.5) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.5) lib/puma/server.rb:472:in `process_client'
+puma (4.3.5) lib/puma/server.rb:328:in `block in run'
+puma (4.3.5) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/api/create-user/" for ::1 at 2020-08-20 01:36:39 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/api/create-user"):
+  
+actionpack (6.0.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3.2) lib/rails/engine.rb:527:in `call'
+puma (4.3.5) lib/puma/configuration.rb:228:in `call'
+puma (4.3.5) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.5) lib/puma/server.rb:472:in `process_client'
+puma (4.3.5) lib/puma/server.rb:328:in `block in run'
+puma (4.3.5) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/favicon.ico" for ::1 at 2020-08-20 01:36:39 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+actionpack (6.0.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3.2) lib/rails/engine.rb:527:in `call'
+puma (4.3.5) lib/puma/configuration.rb:228:in `call'
+puma (4.3.5) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.5) lib/puma/server.rb:472:in `process_client'
+puma (4.3.5) lib/puma/server.rb:328:in `block in run'
+puma (4.3.5) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/" for ::1 at 2020-08-20 01:37:15 -0500
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/mariadelrosarioleon/.rvm/gems/ruby-2.7.0/gems/railties-6.0.3.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/mariadelrosarioleon/.rvm/gems/ruby-2.7.0/gems/railties-6.0.3.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.2ms | Allocations: 8)
+Completed 200 OK in 1ms (Views: 0.8ms | ActiveRecord: 0.0ms | Allocations: 245)
+
+
+Started GET "/api/api-auth/" for ::1 at 2020-08-20 01:37:16 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/api/api-auth"):
+  
+actionpack (6.0.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3.2) lib/rails/engine.rb:527:in `call'
+puma (4.3.5) lib/puma/configuration.rb:228:in `call'
+puma (4.3.5) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.5) lib/puma/server.rb:472:in `process_client'
+puma (4.3.5) lib/puma/server.rb:328:in `block in run'
+puma (4.3.5) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/favicon.ico" for ::1 at 2020-08-20 01:37:16 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+actionpack (6.0.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3.2) lib/rails/engine.rb:527:in `call'
+puma (4.3.5) lib/puma/configuration.rb:228:in `call'
+puma (4.3.5) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.5) lib/puma/server.rb:472:in `process_client'
+puma (4.3.5) lib/puma/server.rb:328:in `block in run'
+puma (4.3.5) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started POST "/api/create-user/" for ::1 at 2020-08-20 01:37:42 -0500
+Processing by Api::UserController#signup as */*
+  Parameters: {"username"=>"maro96leon", "first_name"=>"Maria", "last_name"=>"León", "email"=>"maro96leon@gmail.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[36mUser Exists? (1.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "maro96leon@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+Completed 200 OK in 311ms (Views: 0.1ms | ActiveRecord: 2.0ms | Allocations: 3095)
+
+
+Started POST "/api/api-auth/" for ::1 at 2020-08-20 01:37:47 -0500
+Processing by Api::AuthenticationController#authenticate as */*
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 579ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 1600)
+
+
+Started POST "/api/events/" for ::1 at 2020-08-20 01:38:10 -0500
+Processing by Api::EventsController#post_event as */*
+  Parameters: {"event_name"=>"Sesión Síncrona – Desarrollo de Soluciones Cloud ", "event_category"=>"COURSE", "event_place"=>"Conferencia Virtual vía Sicua+", "event_address"=>"https://sicuaplus.uniandes.edu.co/", "event_initial_date"=>"2020-08-17T18:00:00Z", "event_final_date"=>"2020-08-17T20:30:00Z", "event_type"=>"VIRTUAL"}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/events_controller.rb:5:in `post_event'
+  [1m[36mEvent Create (1.3ms)[0m  [1m[32mINSERT INTO "events" ("id", "event_name", "event_category", "event_place", "event_address", "event_initial_date", "event_final_date", "event_type", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 2], ["event_name", "Sesión Síncrona – Desarrollo de Soluciones Cloud "], ["event_category", "COURSE"], ["event_place", "Conferencia Virtual vía Sicua+"], ["event_address", "https://sicuaplus.uniandes.edu.co/"], ["event_initial_date", "2020-08-17"], ["event_final_date", "2020-08-17"], ["event_type", "VIRTUAL"], ["user_id", 9], ["created_at", "2020-08-20 06:38:10.576254"], ["updated_at", "2020-08-20 06:38:10.576254"]]
+  ↳ app/controllers/api/events_controller.rb:5:in `post_event'
+  [1m[35m (1.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/events_controller.rb:5:in `post_event'
+Completed 200 OK in 86ms (Views: 0.2ms | ActiveRecord: 5.6ms | Allocations: 13742)
+
+
+Started GET "/api/events/" for ::1 at 2020-08-20 01:38:15 -0500
+Processing by Api::EventsController#get_events as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:55:in `get_events'
+Completed 200 OK in 6ms (Views: 2.5ms | ActiveRecord: 0.8ms | Allocations: 1905)
+
+
+Started POST "/api/api-auth/" for ::1 at 2020-08-20 02:22:09 -0500
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 246ms (Views: 3.6ms | ActiveRecord: 0.7ms | Allocations: 701)
+
+
+Started POST "/api/api-auth/" for ::1 at 2020-08-20 02:26:25 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 225ms (Views: 0.4ms | ActiveRecord: 0.2ms | Allocations: 680)
+
+
+Started POST "/api/create-user/" for ::1 at 2020-08-20 02:27:22 -0500
+Processing by Api::UserController#signup as HTML
+  Parameters: {"username"=>"hola", "first_name"=>"undefined", "last_name"=>"wejd", "email"=>"hola@gmail.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "hola@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[36mUser Create (2.1ms)[0m  [1m[32mINSERT INTO "users" ("id", "username", "email", "password_digest", "first_name", "last_name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 0], ["username", "hola"], ["email", "hola@gmail.com"], ["password_digest", "$2a$12$Gw2Ywi39VXwexEn7J5aSNOBNL9heXm5Y1NK/5lJwtwgY0CYT3oDH2"], ["first_name", "undefined"], ["last_name", "wejd"], ["created_at", "2020-08-20 07:27:22.833766"], ["updated_at", "2020-08-20 07:27:22.833766"]]
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+Completed 200 OK in 272ms (Views: 0.2ms | ActiveRecord: 3.1ms | Allocations: 3703)
+
+
+Started POST "/api/create-user/" for ::1 at 2020-08-20 02:28:13 -0500
+Processing by Api::UserController#signup as HTML
+  Parameters: {"username"=>"hola1", "first_name"=>"undefined", "last_name"=>"wejd", "email"=>"hola1@gmail.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "hola1@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("id", "username", "email", "password_digest", "first_name", "last_name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 8], ["username", "hola1"], ["email", "hola1@gmail.com"], ["password_digest", "$2a$12$LOiGxdYY0X2p5TLwnFFDquOjwPWZxPeS0zr4fUykix3zA0mijX77S"], ["first_name", "undefined"], ["last_name", "wejd"], ["created_at", "2020-08-20 07:28:13.864468"], ["updated_at", "2020-08-20 07:28:13.864468"]]
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+Completed 200 OK in 260ms (Views: 0.3ms | ActiveRecord: 2.9ms | Allocations: 3629)
+
+
+Started POST "/api/api-auth/" for ::1 at 2020-08-20 02:28:58 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"hola1", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "hola1"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "hola1"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 452ms (Views: 0.2ms | ActiveRecord: 0.4ms | Allocations: 1243)
+
+
+Started POST "/api/api-auth/" for ::1 at 2020-08-20 02:32:15 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"hola1", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "hola1"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "hola1"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 486ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 1242)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:41:58 -0500
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"hola1", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "hola1"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "hola1"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 506ms (Views: 0.2ms | ActiveRecord: 0.5ms | Allocations: 1266)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:42:08 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"hola1", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "hola1"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "hola1"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 466ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 1242)
+
+
+Started POST "/api/api-auth/" for ::1 at 2020-08-20 02:43:06 -0500
+Processing by Api::AuthenticationController#authenticate as */*
+  Parameters: {"username"=>"Hola1", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "Hola1"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 4ms (Views: 1.4ms | ActiveRecord: 0.3ms | Allocations: 640)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:43:33 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 239ms (Views: 2.2ms | ActiveRecord: 0.2ms | Allocations: 679)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:43:37 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 229ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 679)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:43:39 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 235ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 680)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:43:43 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 241ms (Views: 0.4ms | ActiveRecord: 0.2ms | Allocations: 679)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:43:44 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 230ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 679)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:43:44 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 228ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 680)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:44:21 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 227ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 679)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:44:21 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 238ms (Views: 0.2ms | ActiveRecord: 0.9ms | Allocations: 679)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:44:22 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 230ms (Views: 0.1ms | ActiveRecord: 0.4ms | Allocations: 680)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:44:22 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 234ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 679)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:44:23 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 229ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 679)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:44:46 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 232ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 679)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:45:53 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 456ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 1245)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:45:57 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 463ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1243)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:45:58 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 486ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 1243)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:45:59 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 499ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1245)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:45:59 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 492ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1243)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:46:00 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 480ms (Views: 0.1ms | ActiveRecord: 0.5ms | Allocations: 1252)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:46:00 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 468ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1252)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:46:01 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 472ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1242)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:46:01 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 492ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 1275)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:46:02 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:46:02 -0500
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 481ms (Views: 0.2ms | ActiveRecord: 0.9ms | Allocations: 1449)
+
+
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 562ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 1273)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:46:18 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 460ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1242)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:46:19 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 500ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 1255)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:46:19 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 471ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1274)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:46:20 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:46:20 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+Completed 200 OK in 481ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1927)
+
+
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:46:20 -0500
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 511ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1540)
+
+
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:46:21 -0500
+Completed 200 OK in 471ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 1441)
+
+
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:46:21 -0500
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 485ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1453)
+
+
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 517ms (Views: 0.4ms | ActiveRecord: 0.2ms | Allocations: 1251)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:46:27 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 499ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1242)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:46:28 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 461ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1242)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:46:29 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 489ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 1253)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:46:30 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 460ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 1251)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:46:30 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 462ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1253)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:46:31 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 464ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 1242)
+
+
+Started POST "/api/api-auth/" for ::1 at 2020-08-20 02:46:53 -0500
+Processing by Api::AuthenticationController#authenticate as */*
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 611ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 1244)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:47:22 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 471ms (Views: 0.1ms | ActiveRecord: 0.7ms | Allocations: 1243)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:55:32 -0500
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 474ms (Views: 0.2ms | ActiveRecord: 1.1ms | Allocations: 8036)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:55:50 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 475ms (Views: 0.1ms | ActiveRecord: 0.4ms | Allocations: 1262)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:58:57 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 481ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1262)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 02:59:50 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 486ms (Views: 0.2ms | ActiveRecord: 0.5ms | Allocations: 1263)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 03:07:11 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 463ms (Views: 0.1ms | ActiveRecord: 0.6ms | Allocations: 1268)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 03:08:59 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 259ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 697)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 03:09:12 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 227ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 680)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 03:09:15 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 228ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 680)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 03:09:20 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 455ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 1245)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 03:20:42 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 232ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 701)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 03:20:48 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 241ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 680)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 03:21:17 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 475ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 1244)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 03:22:41 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 240ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 680)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 03:29:57 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 457ms (Views: 0.1ms | ActiveRecord: 0.4ms | Allocations: 1268)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 03:30:13 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 453ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1245)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 03:30:25 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 463ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 1248)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 03:31:16 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 462ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 1244)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 03:31:59 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 458ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1248)
+
+
+Started POST "/api/api-auth/" for ::1 at 2020-08-20 11:19:28 -0500
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 464ms (Views: 0.2ms | ActiveRecord: 1.4ms | Allocations: 8038)
+
+
+Started POST "/api/api-auth/" for ::1 at 2020-08-20 11:19:55 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 443ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 1263)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 11:20:53 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 450ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1262)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 11:22:33 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 449ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 1263)
+
+
+Started POST "/api/api-auth/" for ::1 at 2020-08-20 11:22:55 -0500
+Processing by Api::AuthenticationController#authenticate as */*
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 679ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1268)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 11:24:49 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 449ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 1245)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 11:26:51 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 477ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1244)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 11:30:45 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 247ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 680)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 11:30:47 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 232ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 681)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 11:30:49 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 238ms (Views: 0.1ms | ActiveRecord: 0.1ms | Allocations: 680)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 11:31:16 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (2.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 264ms (Views: 0.2ms | ActiveRecord: 2.7ms | Allocations: 681)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 11:31:30 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 245ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 680)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 11:32:07 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 554ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 1244)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 11:34:21 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 481ms (Views: 0.2ms | ActiveRecord: 0.4ms | Allocations: 1248)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 11:34:49 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 508ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1248)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 11:37:03 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 508ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1248)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 11:42:23 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 504ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1244)
+
+
+Started POST "/api/create-user/" for 127.0.0.1 at 2020-08-20 11:43:21 -0500
+Processing by Api::UserController#signup as HTML
+  Parameters: {"username"=>"hola", "first_name"=>"undefined", "last_name"=>"ajsn", "email"=>"hola@hotmail.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "hola@hotmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[36mUser Create (2.0ms)[0m  [1m[32mINSERT INTO "users" ("id", "username", "email", "password_digest", "first_name", "last_name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 0], ["username", "hola"], ["email", "hola@hotmail.com"], ["password_digest", "$2a$12$mRxDd1gptdenvPFnffKyO.yeijCOGg.oj11U1XXAWpJG4q.auZh2y"], ["first_name", "undefined"], ["last_name", "ajsn"], ["created_at", "2020-08-20 16:43:21.359662"], ["updated_at", "2020-08-20 16:43:21.359662"]]
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+Completed 500 Internal Server Error in 239ms (ActiveRecord: 2.3ms | Allocations: 4125)
+
+
+  
+ActiveRecord::RecordNotUnique (SQLite3::ConstraintException: UNIQUE constraint failed: users.id):
+  
+app/controllers/api/user_controller.rb:6:in `signup'
+Started POST "/api/create-user/" for 127.0.0.1 at 2020-08-20 11:43:49 -0500
+Processing by Api::UserController#signup as HTML
+  Parameters: {"username"=>"hola", "first_name"=>"undefined", "last_name"=>"ajsn", "email"=>"hola@hotmail.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "hola@hotmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("id", "username", "email", "password_digest", "first_name", "last_name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 0], ["username", "hola"], ["email", "hola@hotmail.com"], ["password_digest", "$2a$12$sdL953YVZPauyfBcJ6M/o.sjuE9A5Y9I06amQLN7TSMu8hfSHPT9O"], ["first_name", "undefined"], ["last_name", "ajsn"], ["created_at", "2020-08-20 16:43:50.033511"], ["updated_at", "2020-08-20 16:43:50.033511"]]
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+Completed 500 Internal Server Error in 226ms (ActiveRecord: 0.5ms | Allocations: 3766)
+
+
+  
+ActiveRecord::RecordNotUnique (SQLite3::ConstraintException: UNIQUE constraint failed: users.id):
+  
+app/controllers/api/user_controller.rb:6:in `signup'
+Started POST "/api/create-user/" for 127.0.0.1 at 2020-08-20 11:43:53 -0500
+Processing by Api::UserController#signup as HTML
+  Parameters: {"username"=>"hola", "first_name"=>"undefined", "last_name"=>"ajsn", "email"=>"hola@hotmail.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "hola@hotmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("id", "username", "email", "password_digest", "first_name", "last_name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 0], ["username", "hola"], ["email", "hola@hotmail.com"], ["password_digest", "$2a$12$Il7CsP0DbtYQWHuqnRYdOO9gTEXDcQObaf79RAuXDMG00fEYioJUu"], ["first_name", "undefined"], ["last_name", "ajsn"], ["created_at", "2020-08-20 16:43:53.270640"], ["updated_at", "2020-08-20 16:43:53.270640"]]
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+Completed 500 Internal Server Error in 228ms (ActiveRecord: 0.5ms | Allocations: 3704)
+
+
+  
+ActiveRecord::RecordNotUnique (SQLite3::ConstraintException: UNIQUE constraint failed: users.id):
+  
+app/controllers/api/user_controller.rb:6:in `signup'
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 11:44:32 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 491ms (Views: 0.2ms | ActiveRecord: 0.4ms | Allocations: 1255)
+
+
+Started POST "/api/create-user/" for 127.0.0.1 at 2020-08-20 11:47:05 -0500
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::UserController#signup as HTML
+  Parameters: {"username"=>"fabio", "first_name"=>"undefined", "last_name"=>"mundo", "email"=>"f@gmail.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "f@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO "users" ("id", "username", "email", "password_digest", "first_name", "last_name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 3], ["username", "fabio"], ["email", "f@gmail.com"], ["password_digest", "$2a$12$23NSIqsOZ.965PJA6r1nBuOCKjb3/EMb0UnXN9ZwfdhRsXwneps1i"], ["first_name", "undefined"], ["last_name", "mundo"], ["created_at", "2020-08-20 16:47:05.766828"], ["updated_at", "2020-08-20 16:47:05.766828"]]
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+  [1m[35m (2.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/user_controller.rb:6:in `signup'
+Completed 200 OK in 261ms (Views: 0.3ms | ActiveRecord: 3.9ms | Allocations: 10442)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 11:47:05 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"fabio", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "fabio"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "fabio"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 494ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 2621)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 12:07:33 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 486ms (Views: 0.2ms | ActiveRecord: 0.4ms | Allocations: 1278)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 12:07:34 -0500
+Processing by Api::EventsController#get_events as HTML
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 0.5ms | ActiveRecord: 0.0ms | Allocations: 246)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 12:09:41 -0500
+Processing by Api::EventsController#get_events as HTML
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 122)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 12:09:54 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 479ms (Views: 0.1ms | ActiveRecord: 0.5ms | Allocations: 1262)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 12:09:55 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (0.8ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:55:in `get_events'
+Completed 200 OK in 58ms (Views: 29.7ms | ActiveRecord: 1.8ms | Allocations: 12726)
+
+
+Started POST "/api/events/" for 127.0.0.1 at 2020-08-20 12:15:57 -0500
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::EventsController#post_event as HTML
+  Parameters: {"event_name"=>"finalDate", "event_category"=>"undefined", "event_place"=>"undefined", "event_address"=>"undefined", "event_initial_date"=>"undefined", "event_final_date"=>"undefined", "event_type"=>"date", "thumbnail"=>"undefined"}
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.8ms | ActiveRecord: 0.0ms | Allocations: 128)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 12:17:18 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 521ms (Views: 0.1ms | ActiveRecord: 0.4ms | Allocations: 1265)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 12:17:19 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:55:in `get_events'
+Completed 200 OK in 4ms (Views: 1.5ms | ActiveRecord: 0.5ms | Allocations: 1896)
+
+
+Started POST "/api/events/" for 127.0.0.1 at 2020-08-20 12:17:53 -0500
+Processing by Api::EventsController#post_event as HTML
+  Parameters: {"event_name"=>"finalDate", "event_category"=>"undefined", "event_place"=>"undefined", "event_address"=>"undefined", "event_initial_date"=>"undefined", "event_final_date"=>"undefined", "event_type"=>"date", "thumbnail"=>"undefined"}
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 128)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 12:17:59 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (3.2ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:55:in `get_events'
+Completed 200 OK in 10ms (Views: 3.3ms | ActiveRecord: 3.5ms | Allocations: 1890)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 12:23:06 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 492ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 1267)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 12:23:06 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (0.3ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:55:in `get_events'
+Completed 200 OK in 6ms (Views: 3.0ms | ActiveRecord: 0.7ms | Allocations: 1896)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 13:19:36 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 225ms (Views: 0.1ms | ActiveRecord: 0.8ms | Allocations: 713)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 13:19:46 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 224ms (Views: 0.1ms | ActiveRecord: 0.4ms | Allocations: 680)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 13:20:07 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 452ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1244)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 13:20:08 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (2.2ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:55:in `get_events'
+Completed 200 OK in 11ms (Views: 3.2ms | ActiveRecord: 2.5ms | Allocations: 1896)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 13:22:01 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 456ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1244)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 13:22:01 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:55:in `get_events'
+Completed 200 OK in 4ms (Views: 1.6ms | ActiveRecord: 0.5ms | Allocations: 1874)
+
+
+Started POST "/api/events/" for 127.0.0.1 at 2020-08-20 13:22:41 -0500
+Processing by Api::EventsController#post_event as HTML
+  Parameters: {"event_name"=>"Hola", "event_category"=>"Seminar", "event_place"=>"bkwxb", "event_address"=>"no te voy", "event_initial_date"=>"2020-08-10", "event_final_date"=>"2020-08-18", "event_type"=>"Presencial", "thumbnail"=>""}
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 128)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 13:27:05 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 534ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 1244)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 13:27:06 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (0.3ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:55:in `get_events'
+Completed 200 OK in 11ms (Views: 3.4ms | ActiveRecord: 0.9ms | Allocations: 1872)
+
+
+Started POST "/api/events/" for 127.0.0.1 at 2020-08-20 13:27:59 -0500
+Processing by Api::EventsController#post_event as HTML
+  Parameters: {"event_name"=>"rfer", "event_category"=>"Congress", "event_place"=>"lo que sea", "event_address"=>"who cares", "event_initial_date"=>"2020-08-04", "event_final_date"=>"2020-08-26", "event_type"=>"Presencial", "thumbnail"=>""}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+Completed 200 OK in 5ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 1395)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 13:28:06 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (0.5ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:55:in `get_events'
+Completed 200 OK in 8ms (Views: 3.8ms | ActiveRecord: 0.7ms | Allocations: 1874)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 13:28:12 -0500
+Processing by Api::EventsController#get_events as HTML
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 122)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 13:28:27 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 448ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1244)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 13:28:27 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (0.4ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:55:in `get_events'
+Completed 200 OK in 8ms (Views: 3.8ms | ActiveRecord: 0.7ms | Allocations: 1872)
+
+
+Started GET "/api/events/" for ::1 at 2020-08-20 13:29:48 -0500
+Processing by Api::EventsController#get_events as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:55:in `get_events'
+Completed 200 OK in 3ms (Views: 1.2ms | ActiveRecord: 0.4ms | Allocations: 1875)
+
+
+Started POST "/api/api-auth/" for ::1 at 2020-08-20 13:29:56 -0500
+Processing by Api::AuthenticationController#authenticate as */*
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 486ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1250)
+
+
+Started POST "/api/api-auth/" for ::1 at 2020-08-20 13:30:28 -0500
+Processing by Api::AuthenticationController#authenticate as */*
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 508ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 1247)
+
+
+Started GET "/api/events/" for ::1 at 2020-08-20 13:30:37 -0500
+Processing by Api::EventsController#get_events as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (0.4ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:55:in `get_events'
+Completed 200 OK in 11ms (Views: 8.5ms | ActiveRecord: 0.5ms | Allocations: 1875)
+
+
+Started GET "/api/events/" for ::1 at 2020-08-20 13:31:07 -0500
+Processing by Api::EventsController#get_events as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (0.3ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:55:in `get_events'
+Completed 200 OK in 5ms (Views: 1.5ms | ActiveRecord: 0.7ms | Allocations: 1877)
+
+
+Started POST "/api/events/" for 127.0.0.1 at 2020-08-20 13:33:18 -0500
+Processing by Api::EventsController#post_event as HTML
+  Parameters: {"event_name"=>"Hola", "event_category"=>"Congress", "event_place"=>"mi caas", "event_address"=>"no", "event_initial_date"=>"2020-08-03", "event_final_date"=>"2020-08-25", "event_type"=>"Presencial", "thumbnail"=>""}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1319)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 13:34:45 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 455ms (Views: 0.1ms | ActiveRecord: 0.4ms | Allocations: 1252)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 13:34:46 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (0.3ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:55:in `get_events'
+Completed 200 OK in 7ms (Views: 3.8ms | ActiveRecord: 1.4ms | Allocations: 1872)
+
+
+Started POST "/api/events/" for 127.0.0.1 at 2020-08-20 13:35:16 -0500
+Processing by Api::EventsController#post_event as HTML
+  Parameters: {"event_name"=>"Maria", "event_category"=>"Congress", "event_place"=>"saddaw", "event_address"=>"wdfe", "event_initial_date"=>"2020-08-25", "event_final_date"=>"2020-08-31", "event_type"=>"Presencial", "thumbnail"=>""}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+Completed 200 OK in 3ms (Views: 0.5ms | ActiveRecord: 0.2ms | Allocations: 1319)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 13:35:24 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (0.6ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:55:in `get_events'
+Completed 200 OK in 6ms (Views: 2.3ms | ActiveRecord: 0.9ms | Allocations: 1874)
+
+
+Started GET "/api/events/" for ::1 at 2020-08-20 13:35:29 -0500
+Processing by Api::EventsController#get_events as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (0.3ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:55:in `get_events'
+Completed 200 OK in 5ms (Views: 2.0ms | ActiveRecord: 0.5ms | Allocations: 1875)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 13:37:55 -0500
+Processing by Api::EventsController#get_events as HTML
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 122)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 13:39:56 -0500
+Processing by Api::EventsController#get_events as HTML
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 122)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 13:40:24 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 448ms (Views: 0.1ms | ActiveRecord: 0.7ms | Allocations: 1247)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 13:40:24 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (0.3ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:55:in `get_events'
+Completed 200 OK in 5ms (Views: 2.8ms | ActiveRecord: 0.4ms | Allocations: 1872)
+
+
+Started POST "/api/events/" for 127.0.0.1 at 2020-08-20 13:41:02 -0500
+Processing by Api::EventsController#post_event as HTML
+  Parameters: {"event_name"=>"Maria", "event_category"=>"Seminar", "event_place"=>"njnfkrnf", "event_address"=>"jernjngr", "event_initial_date"=>"2020-08-11", "event_final_date"=>"2020-08-25", "event_type"=>"Presencial", "thumbnail"=>"C:\\fakepath\\Screen Shot 2020-08-20 at 11.18.50 AM.png"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 1318)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 13:41:02 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (0.5ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:55:in `get_events'
+Completed 200 OK in 13ms (Views: 7.7ms | ActiveRecord: 0.7ms | Allocations: 1874)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 13:42:17 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (10.3ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:55:in `get_events'
+Completed 200 OK in 17ms (Views: 3.6ms | ActiveRecord: 10.6ms | Allocations: 1872)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 14:33:25 -0500
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 706ms (Views: 0.4ms | ActiveRecord: 9.9ms | Allocations: 8039)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 14:33:26 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (1.8ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:55:in `get_events'
+Completed 200 OK in 93ms (Views: 38.6ms | ActiveRecord: 3.6ms | Allocations: 11537)
+
+
+Started POST "/api/events/" for 127.0.0.1 at 2020-08-20 14:34:32 -0500
+Processing by Api::EventsController#post_event as HTML
+  Parameters: {"event_name"=>"kasmklxmsxn", "event_category"=>"", "event_place"=>"lekwdnlkwejd", "event_address"=>"ljndejenwdjwe", "event_initial_date"=>"2020-08-25", "event_final_date"=>"2020-08-31", "event_type"=>"Presencial", "thumbnail"=>""}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+Completed 200 OK in 12ms (Views: 0.3ms | ActiveRecord: 0.4ms | Allocations: 2898)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 14:34:32 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (0.3ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:55:in `get_events'
+Completed 200 OK in 81ms (Views: 2.7ms | ActiveRecord: 1.1ms | Allocations: 1892)
+
+
+Started GET "/api/events/" for ::1 at 2020-08-20 14:35:11 -0500
+Processing by Api::EventsController#get_events as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (0.3ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:55:in `get_events'
+Completed 200 OK in 4ms (Views: 1.5ms | ActiveRecord: 0.4ms | Allocations: 1875)
+
+
+Started POST "/api/events/" for 127.0.0.1 at 2020-08-20 14:36:00 -0500
+Processing by Api::EventsController#post_event as HTML
+  Parameters: {"event_name"=>"aksmlkdns", "event_category"=>"Seminar", "event_place"=>"aslkmnxkasmx", "event_address"=>"asklmxlaskx", "event_initial_date"=>"2020-08-18", "event_final_date"=>"2020-08-25", "event_type"=>"Presencial", "thumbnail"=>""}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+Completed 200 OK in 5ms (Views: 1.0ms | ActiveRecord: 0.2ms | Allocations: 1317)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 14:36:00 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (0.3ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:55:in `get_events'
+Completed 200 OK in 5ms (Views: 2.4ms | ActiveRecord: 0.5ms | Allocations: 1875)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 14:41:52 -0500
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::EventsController#get_events as HTML
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 126)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 14:42:40 -0500
+Processing by Api::EventsController#get_events as HTML
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 0ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 122)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 14:43:28 -0500
+  [1m[35m (21.7ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+SyntaxError (/Users/mariadelrosarioleon/OneDrive - Universidad de los Andes/Universidad Maestría/Construcción de soluciones Cloud/Proyectos/Project0Cloud/app/controllers/api/events_controller.rb:8: syntax error, unexpected integer literal, expecting `do' or '{' or '('
+...render json: @event, status 400
+...                            ^~~
+):
+  
+app/controllers/api/events_controller.rb:8: syntax error, unexpected integer literal, expecting `do' or '{' or '('
+app/controllers/api/events_controller.rb:8: syntax error, unexpected integer literal, expecting `do' or '{' or '('
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 14:43:53 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (4.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 609ms (Views: 0.2ms | ActiveRecord: 5.4ms | Allocations: 8127)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 14:43:54 -0500
+  
+ActionController::RoutingError (uninitialized constant Api::EventsController):
+  
+actionpack (6.0.3.2) lib/action_dispatch/http/request.rb:92:in `rescue in controller_class_for'
+actionpack (6.0.3.2) lib/action_dispatch/http/request.rb:88:in `controller_class_for'
+actionpack (6.0.3.2) lib/action_dispatch/http/request.rb:81:in `controller_class'
+actionpack (6.0.3.2) lib/action_dispatch/routing/route_set.rb:44:in `controller'
+actionpack (6.0.3.2) lib/action_dispatch/routing/route_set.rb:31:in `serve'
+actionpack (6.0.3.2) lib/action_dispatch/journey/router.rb:49:in `block in serve'
+actionpack (6.0.3.2) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.0.3.2) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.0.3.2) lib/action_dispatch/routing/route_set.rb:834:in `call'
+rack (2.2.3) lib/rack/etag.rb:27:in `call'
+rack (2.2.3) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.3) lib/rack/head.rb:12:in `call'
+activerecord (6.0.3.2) lib/active_record/migration.rb:567:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.3.2) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.3.2) lib/rails/engine.rb:527:in `call'
+puma (4.3.5) lib/puma/configuration.rb:228:in `call'
+puma (4.3.5) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.5) lib/puma/server.rb:472:in `process_client'
+puma (4.3.5) lib/puma/server.rb:328:in `block in run'
+puma (4.3.5) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started POST "/api/events/" for 127.0.0.1 at 2020-08-20 14:44:24 -0500
+  
+ActionController::RoutingError (uninitialized constant Api::EventsController):
+  
+actionpack (6.0.3.2) lib/action_dispatch/http/request.rb:92:in `rescue in controller_class_for'
+actionpack (6.0.3.2) lib/action_dispatch/http/request.rb:88:in `controller_class_for'
+actionpack (6.0.3.2) lib/action_dispatch/http/request.rb:81:in `controller_class'
+actionpack (6.0.3.2) lib/action_dispatch/routing/route_set.rb:44:in `controller'
+actionpack (6.0.3.2) lib/action_dispatch/routing/route_set.rb:31:in `serve'
+actionpack (6.0.3.2) lib/action_dispatch/journey/router.rb:49:in `block in serve'
+actionpack (6.0.3.2) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.0.3.2) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.0.3.2) lib/action_dispatch/routing/route_set.rb:834:in `call'
+rack (2.2.3) lib/rack/etag.rb:27:in `call'
+rack (2.2.3) lib/rack/conditional_get.rb:40:in `call'
+rack (2.2.3) lib/rack/head.rb:12:in `call'
+activerecord (6.0.3.2) lib/active_record/migration.rb:567:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.3.2) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.3.2) lib/rails/engine.rb:527:in `call'
+puma (4.3.5) lib/puma/configuration.rb:228:in `call'
+puma (4.3.5) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.5) lib/puma/server.rb:472:in `process_client'
+puma (4.3.5) lib/puma/server.rb:328:in `block in run'
+puma (4.3.5) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 14:45:02 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 724ms (Views: 0.4ms | ActiveRecord: 0.3ms | Allocations: 1243)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 14:45:03 -0500
+  
+ActionController::RoutingError (uninitialized constant Api::EventsController):
+  
+actionpack (6.0.3.2) lib/action_dispatch/http/request.rb:92:in `rescue in controller_class_for'
+actionpack (6.0.3.2) lib/action_dispatch/http/request.rb:88:in `controller_class_for'
+actionpack (6.0.3.2) lib/action_dispatch/http/request.rb:81:in `controller_class'
+actionpack (6.0.3.2) lib/action_dispatch/routing/route_set.rb:44:in `controller'
+actionpack (6.0.3.2) lib/action_dispatch/routing/route_set.rb:31:in `serve'
+actionpack (6.0.3.2) lib/action_dispatch/journey/router.rb:49:in `block in serve'
+actionpack (6.0.3.2) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.0.3.2) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.0.3.2) lib/action_dispatch/routing/route_set.rb:834:in `call'
+rack (2.2.3) lib/rack/etag.rb:27:in `call'
+rack (2.2.3) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.3) lib/rack/head.rb:12:in `call'
+activerecord (6.0.3.2) lib/active_record/migration.rb:567:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.3.2) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.3.2) lib/rails/engine.rb:527:in `call'
+puma (4.3.5) lib/puma/configuration.rb:228:in `call'
+puma (4.3.5) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.5) lib/puma/server.rb:472:in `process_client'
+puma (4.3.5) lib/puma/server.rb:328:in `block in run'
+puma (4.3.5) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 14:45:23 -0500
+  
+ActionController::RoutingError (uninitialized constant Api::EventsController):
+  
+actionpack (6.0.3.2) lib/action_dispatch/http/request.rb:92:in `rescue in controller_class_for'
+actionpack (6.0.3.2) lib/action_dispatch/http/request.rb:88:in `controller_class_for'
+actionpack (6.0.3.2) lib/action_dispatch/http/request.rb:81:in `controller_class'
+actionpack (6.0.3.2) lib/action_dispatch/routing/route_set.rb:44:in `controller'
+actionpack (6.0.3.2) lib/action_dispatch/routing/route_set.rb:31:in `serve'
+actionpack (6.0.3.2) lib/action_dispatch/journey/router.rb:49:in `block in serve'
+actionpack (6.0.3.2) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.0.3.2) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.0.3.2) lib/action_dispatch/routing/route_set.rb:834:in `call'
+rack (2.2.3) lib/rack/etag.rb:27:in `call'
+rack (2.2.3) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.3) lib/rack/head.rb:12:in `call'
+activerecord (6.0.3.2) lib/active_record/migration.rb:567:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.3.2) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.3.2) lib/rails/engine.rb:527:in `call'
+puma (4.3.5) lib/puma/configuration.rb:228:in `call'
+puma (4.3.5) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.5) lib/puma/server.rb:472:in `process_client'
+puma (4.3.5) lib/puma/server.rb:328:in `block in run'
+puma (4.3.5) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/api/events/" for ::1 at 2020-08-20 14:45:50 -0500
+  
+ActionController::RoutingError (uninitialized constant Api::EventsController):
+  
+actionpack (6.0.3.2) lib/action_dispatch/http/request.rb:92:in `rescue in controller_class_for'
+actionpack (6.0.3.2) lib/action_dispatch/http/request.rb:88:in `controller_class_for'
+actionpack (6.0.3.2) lib/action_dispatch/http/request.rb:81:in `controller_class'
+actionpack (6.0.3.2) lib/action_dispatch/routing/route_set.rb:44:in `controller'
+actionpack (6.0.3.2) lib/action_dispatch/routing/route_set.rb:31:in `serve'
+actionpack (6.0.3.2) lib/action_dispatch/journey/router.rb:49:in `block in serve'
+actionpack (6.0.3.2) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.0.3.2) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.0.3.2) lib/action_dispatch/routing/route_set.rb:834:in `call'
+rack (2.2.3) lib/rack/etag.rb:27:in `call'
+rack (2.2.3) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.3) lib/rack/head.rb:12:in `call'
+activerecord (6.0.3.2) lib/active_record/migration.rb:567:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.3.2) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.3.2) lib/rails/engine.rb:527:in `call'
+puma (4.3.5) lib/puma/configuration.rb:228:in `call'
+puma (4.3.5) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.5) lib/puma/server.rb:472:in `process_client'
+puma (4.3.5) lib/puma/server.rb:328:in `block in run'
+puma (4.3.5) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 14:47:19 -0500
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 579ms (Views: 0.3ms | ActiveRecord: 1.9ms | Allocations: 8038)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 14:47:19 -0500
+  
+SyntaxError (/Users/mariadelrosarioleon/OneDrive - Universidad de los Andes/Universidad Maestría/Construcción de soluciones Cloud/Proyectos/Project0Cloud/app/controllers/api/events_controller.rb:8: syntax error, unexpected integer literal, expecting `do' or '{' or '('
+...render json: @event, status 400
+...                            ^~~
+):
+  
+app/controllers/api/events_controller.rb:8: syntax error, unexpected integer literal, expecting `do' or '{' or '('
+app/controllers/api/events_controller.rb:8: syntax error, unexpected integer literal, expecting `do' or '{' or '('
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 14:48:31 -0500
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 502ms (Views: 0.2ms | ActiveRecord: 1.1ms | Allocations: 8040)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 14:48:31 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (1.0ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:53:in `get_events'
+Completed 200 OK in 71ms (Views: 26.8ms | ActiveRecord: 3.3ms | Allocations: 11533)
+
+
+Started POST "/api/events/" for 127.0.0.1 at 2020-08-20 14:49:07 -0500
+Processing by Api::EventsController#post_event as HTML
+  Parameters: {"event_name"=>"jwendjkwned", "event_category"=>"SEMINAR", "event_place"=>"wnedkwjendkw", "event_address"=>"wjendjkwendwq", "event_initial_date"=>"2020-08-31", "event_final_date"=>"2020-09-01", "event_type"=>"PRESENCIAL", "thumbnail"=>""}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/events_controller.rb:4:in `post_event'
+  [1m[36mEvent Create (0.9ms)[0m  [1m[32mINSERT INTO "events" ("id", "event_name", "event_category", "event_place", "event_address", "event_initial_date", "event_final_date", "event_type", "thumbnail", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 67], ["event_name", "jwendjkwned"], ["event_category", "SEMINAR"], ["event_place", "wnedkwjendkw"], ["event_address", "wjendjkwendwq"], ["event_initial_date", "2020-08-31"], ["event_final_date", "2020-09-01"], ["event_type", "PRESENCIAL"], ["thumbnail", ""], ["user_id", 9], ["created_at", "2020-08-20 19:49:07.435249"], ["updated_at", "2020-08-20 19:49:07.435249"]]
+  ↳ app/controllers/api/events_controller.rb:4:in `post_event'
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/events_controller.rb:4:in `post_event'
+Completed 200 OK in 12ms (Views: 0.2ms | ActiveRecord: 2.7ms | Allocations: 3975)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 14:49:07 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (0.4ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:53:in `get_events'
+Completed 200 OK in 7ms (Views: 3.8ms | ActiveRecord: 0.7ms | Allocations: 2120)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 14:50:07 -0500
+Processing by Api::EventsController#get_events as HTML
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 126)
+
+
+Started POST "/api/api-auth/" for ::1 at 2020-08-20 15:26:42 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 1775ms (Views: 0.1ms | ActiveRecord: 0.9ms | Allocations: 1272)
+
+
+Started GET "/api/events/" for ::1 at 2020-08-20 15:26:45 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (1.3ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:53:in `get_events'
+Completed 200 OK in 9ms (Views: 3.6ms | ActiveRecord: 1.6ms | Allocations: 2126)
+
+
+Started GET "/api/events/" for ::1 at 2020-08-20 15:30:51 -0500
+Processing by Api::EventsController#get_events as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (0.3ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:53:in `get_events'
+Completed 200 OK in 7ms (Views: 4.6ms | ActiveRecord: 0.5ms | Allocations: 2105)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 15:33:09 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 1013ms (Views: 0.3ms | ActiveRecord: 0.3ms | Allocations: 1248)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 15:33:10 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (0.4ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:53:in `get_events'
+Completed 200 OK in 31ms (Views: 4.2ms | ActiveRecord: 0.6ms | Allocations: 2102)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 15:33:53 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (0.3ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:53:in `get_events'
+Completed 200 OK in 31ms (Views: 2.4ms | ActiveRecord: 0.8ms | Allocations: 2121)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 16:29:27 -0500
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::EventsController#get_events as HTML
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 4ms (Views: 2.2ms | ActiveRecord: 0.0ms | Allocations: 122)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 16:29:38 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 1302ms (Views: 0.2ms | ActiveRecord: 2.1ms | Allocations: 1286)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 16:29:40 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (4.1ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:53:in `get_events'
+Completed 200 OK in 51ms (Views: 39.1ms | ActiveRecord: 4.4ms | Allocations: 2128)
+
+
+Started POST "/api/api-auth/" for ::1 at 2020-08-20 18:59:42 -0500
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 479ms (Views: 0.2ms | ActiveRecord: 1.3ms | Allocations: 8038)
+
+
+Started GET "/api/events/" for ::1 at 2020-08-20 18:59:43 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (0.8ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:53:in `get_events'
+Completed 200 OK in 35ms (Views: 15.1ms | ActiveRecord: 1.7ms | Allocations: 11787)
+
+
+Started POST "/api/api-auth/" for ::1 at 2020-08-20 19:13:47 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 447ms (Views: 0.2ms | ActiveRecord: 0.6ms | Allocations: 1278)
+
+
+Started GET "/api/events/" for ::1 at 2020-08-20 19:13:48 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (1.1ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:53:in `get_events'
+Completed 200 OK in 5ms (Views: 2.2ms | ActiveRecord: 1.3ms | Allocations: 2144)
+
+
+Started POST "/api/api-auth/" for ::1 at 2020-08-20 19:29:40 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 513ms (Views: 0.1ms | ActiveRecord: 0.6ms | Allocations: 1268)
+
+
+Started GET "/api/events/" for ::1 at 2020-08-20 19:29:41 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (0.8ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:53:in `get_events'
+Completed 200 OK in 5ms (Views: 2.0ms | ActiveRecord: 1.1ms | Allocations: 2144)
+
+
+Started GET "/api/events/" for ::1 at 2020-08-20 19:29:59 -0500
+Processing by Api::EventsController#get_events as HTML
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 126)
+
+
+Started POST "/api/api-auth/" for ::1 at 2020-08-20 19:30:11 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 460ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1247)
+
+
+Started GET "/api/events/" for ::1 at 2020-08-20 19:30:12 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (0.3ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:53:in `get_events'
+Completed 200 OK in 5ms (Views: 2.5ms | ActiveRecord: 0.4ms | Allocations: 2102)
+
+
+Started GET "/api/events/" for ::1 at 2020-08-20 19:44:12 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::EventsController#get_events as HTML
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms | Allocations: 122)
+
+
+Started GET "/api/events/" for ::1 at 2020-08-20 19:44:27 -0500
+Processing by Api::EventsController#get_events as HTML
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms | Allocations: 123)
+
+
+Started POST "/api/api-auth/" for ::1 at 2020-08-20 19:44:46 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 474ms (Views: 0.2ms | ActiveRecord: 1.9ms | Allocations: 1268)
+
+
+Started GET "/api/events/" for ::1 at 2020-08-20 19:44:47 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (1.3ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:53:in `get_events'
+Completed 200 OK in 17ms (Views: 11.8ms | ActiveRecord: 1.7ms | Allocations: 2127)
+
+
+Started GET "/api/events/" for ::1 at 2020-08-20 19:50:26 -0500
+Processing by Api::EventsController#get_events as HTML
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 122)
+
+
+Started POST "/api/api-auth/" for ::1 at 2020-08-20 19:52:27 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 472ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1244)
+
+
+Started GET "/api/events/" for ::1 at 2020-08-20 19:52:27 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (0.5ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:53:in `get_events'
+Completed 200 OK in 8ms (Views: 4.0ms | ActiveRecord: 0.9ms | Allocations: 2102)
+
+
+Started POST "/api/api-auth/" for ::1 at 2020-08-20 19:59:22 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 465ms (Views: 0.1ms | ActiveRecord: 1.0ms | Allocations: 1271)
+
+
+Started GET "/api/events/" for ::1 at 2020-08-20 19:59:23 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (1.1ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:53:in `get_events'
+Completed 200 OK in 8ms (Views: 2.7ms | ActiveRecord: 1.3ms | Allocations: 2129)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 20:00:09 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 483ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1244)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 20:00:09 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (0.9ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:53:in `get_events'
+Completed 200 OK in 10ms (Views: 5.9ms | ActiveRecord: 1.3ms | Allocations: 2102)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 21:27:15 -0500
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::EventsController#get_events as HTML
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 1.3ms | ActiveRecord: 0.0ms | Allocations: 122)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 21:27:39 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 479ms (Views: 0.2ms | ActiveRecord: 0.7ms | Allocations: 1266)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 21:27:40 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (3.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (0.9ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:53:in `get_events'
+Completed 200 OK in 16ms (Views: 5.4ms | ActiveRecord: 4.7ms | Allocations: 2126)
+
+
+Started GET "/api/events/undefined" for 127.0.0.1 at 2020-08-20 21:27:42 -0500
+Processing by Api::EventsController#get_events as HTML
+  Parameters: {"id"=>"undefined"}
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 128)
+
+
+Started GET "/api/events/undefined" for 127.0.0.1 at 2020-08-20 21:33:01 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::EventsController#get_events as HTML
+  Parameters: {"id"=>"undefined"}
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 0ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 128)
+
+
+Started GET "/api/events/undefined" for 127.0.0.1 at 2020-08-20 21:33:03 -0500
+Processing by Api::EventsController#get_events as HTML
+  Parameters: {"id"=>"undefined"}
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms | Allocations: 128)
+
+
+Started GET "/api/events/undefined" for 127.0.0.1 at 2020-08-20 21:33:11 -0500
+Processing by Api::EventsController#get_events as HTML
+  Parameters: {"id"=>"undefined"}
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 128)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 21:33:22 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 233ms (Views: 0.3ms | ActiveRecord: 0.8ms | Allocations: 702)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 21:33:30 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 222ms (Views: 0.3ms | ActiveRecord: 0.3ms | Allocations: 680)
+
+
+Started POST "/api/api-auth/" for 127.0.0.1 at 2020-08-20 21:33:41 -0500
+Processing by Api::AuthenticationController#authenticate as HTML
+  Parameters: {"username"=>"maro96leon", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "maro96leon"], ["LIMIT", 1]]
+  ↳ app/commands/authenticate_user.rb:20:in `user'
+Completed 200 OK in 446ms (Views: 0.2ms | ActiveRecord: 0.4ms | Allocations: 1244)
+
+
+Started GET "/api/events/" for 127.0.0.1 at 2020-08-20 21:33:42 -0500
+Processing by Api::EventsController#get_events as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/commands/authorize_api_request.rb:19:in `user'
+  [1m[36mEvent Load (3.4ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."user_id" = ? ORDER BY "timestamps" ASC[0m  [["user_id", 9]]
+  ↳ app/controllers/api/events_controller.rb:53:in `get_events'
+Completed 200 OK in 13ms (Views: 5.3ms | ActiveRecord: 3.8ms | Allocations: 2127)
+
+
+Started GET "/api/events/undefined" for 127.0.0.1 at 2020-08-20 21:33:43 -0500
+Processing by Api::EventsController#get_events as HTML
+  Parameters: {"id"=>"undefined"}
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms | Allocations: 128)
+
+
+Started GET "/api/events/undefined" for 127.0.0.1 at 2020-08-20 21:37:36 -0500
+Processing by Api::EventsController#get_events as HTML
+  Parameters: {"id"=>"undefined"}
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 0ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 129)
+
+
+Started GET "/api/events/undefined" for 127.0.0.1 at 2020-08-20 21:39:57 -0500
+Processing by Api::EventsController#get_events as HTML
+  Parameters: {"id"=>"undefined"}
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 128)
+
+

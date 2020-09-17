@@ -49,7 +49,7 @@ export default class SignUp extends Component {
         userData.set('username', this.state.userName);
         userData.set('password', this.state.password);
 
-        axios.post(`http://172.24.98.144:8080/api/create-user/`, 
+        axios.post(`http://${process.env.REACT_APP_BACKEND_URL}/api/create-user/`, 
         user,
         { 
             headers: {
@@ -60,7 +60,7 @@ export default class SignUp extends Component {
         .then(res => {
             console.log(res);
             console.log(res.data);
-            axios.post(`http://172.24.98.144:8080/api/api-auth/`,
+            axios.post(`http://${process.env.REACT_APP_BACKEND_URL}/api/api-auth/`,
             userData,
             {
                 headers:{

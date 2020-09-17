@@ -29,7 +29,7 @@ export default class Login extends Component {
         userData.set('username', this.state.userName);
         userData.set('password', this.state.password);
 
-        axios.post(`http://172.24.98.144:8080/api/api-auth/`,
+        axios.post(`http://${process.env.REACT_APP_BACKEND_URL}/api/api-auth/`,
             userData,
             {
                 headers:{
